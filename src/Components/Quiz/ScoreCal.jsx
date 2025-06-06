@@ -10,9 +10,13 @@ const ScoreCal = ({score,total, onReset}) => {
     else if(percentage >= 70){
         remark = "Good Job😊";
     }
-    else if(percentage >=50){
+    else if(percentage >=33){
         remark = "Keep Practicing! 💪";
     }
+    else {
+        remark = "Better Luck Next Time! 🍀";
+    }
+    
   return (
     <div className="summary">
         <h2>Quiz Completed!</h2>

@@ -12,6 +12,12 @@
     gap: 15px;
     border-radius: 10px;
     padding: 40px 40px;
+    box-shadow:100px 40px 80px rgba(0, 0, 0, 0.1);
+}
+.timer{
+    font-size: 18px;
+    font-weight: 500;
+    color : black;
 }
 
 .container hr
@@ -38,6 +44,9 @@
     cursor: pointer;
 
 }
+
+
+
 
 .container button{
     margin: auto;
@@ -66,4 +75,18 @@
 .container .wrong{
    background: #FFEBEB;
    border-color: #FF4A4A;
+}
+
+.toggle-theme {
+  background-color: transparent;
+  border: 1px solid gray;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border-radius: 6px;
+  color: inherit;
+}
+.toggle-theme:hover {
+  background-color: #444;
+  color: #fff;
 }

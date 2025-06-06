@@ -11,10 +11,11 @@
 .summary button {
   margin-top: 1rem;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #553f9a;
+  font-size: 20px;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
 }
 .summary p {

@@ -1,6 +1,6 @@
 import React from "react";
 import "./Quiz.css";
-import { useState,useRef } from "react";
+import { useState,useRef,useEffect } from "react";
 import {data} from '../../assets/data';
 import ScoreCal from "./ScoreCal";
 const Quiz = () => {
@@ -10,6 +10,8 @@ const Quiz = () => {
   let [lock,setLock] = useState(false);
   let [score,setScore] = useState(0);
   let [result,setResult] = useState(false);
+  let [timeLeft,setTimeLeft] = useState(20);
+
 
   let Option1 = useRef(null);
   let Option2 = useRef(null);
@@ -47,6 +49,7 @@ const Quiz = () => {
         setIndex(++index);
         setQuestions(data[index]);
         setLock(false);
+        setTimeLeft(20); // Reset timer for next question
         option_array.map((option) => {
             option.current.classList.remove("wrong");
             option.current.classList.remove("correct");
@@ -54,6 +57,21 @@ const Quiz = () => {
         })
     }
   }
+   useEffect(() => {
+  if (result)
+    { return; } // Don't run timer on result page
+
+  if (timeLeft === 0) {
+    nextQuestion(); // Move to next question automatically
+    return;
+  }
+
+  const timer = setTimeout(() => {
+    setTimeLeft(prev => prev - 1);
+  }, 1000);
+
+  return () => clearTimeout(timer); // Cleanup when component updates/unmounts
+}, [timeLeft, result]);
 
   const reset = ()=>{
     setIndex(0);
@@ -61,14 +79,17 @@ const Quiz = () => {
     setScore(0);
     setLock(false);
     setResult(false);
+    setTimeLeft(20);
   }
   return (
     <div className="container">
       <h1>Quiz App</h1>
+      <div className="timer">
+        <span>Time Left: {timeLeft} seconds</span>
+      </div>
       <hr />
-
-      {result? (
-      <ScoreCal score={score} total={data.length} onReset={reset} />) : (
+      {result? (<>
+      <ScoreCal score={score} total={data.length} onReset={reset} /></>) : (
         <><h2>{index + 1}. {question.question}</h2>
       <ul>
         <li ref={Option1} onClick={(e)=>{checkAnswer(e,1)}}>{question.option1}</li>
